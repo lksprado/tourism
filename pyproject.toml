@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "turismo"
+version = "0.1.0"
+description = ""
+authors = ["lksprado <lks-prado@live.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.3.3"
+black = "^24.10.0"
+isort = "^5.13.2"
+taskipy = "^1.13.0"
+pandera = {extras = ["io"], version = "^0.20.4"}
+pandas = "^2.2.3"
+openpyxl = "^3.1.5"
+xlrd = "^2.0.1"
+chardet = "^5.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+[tool.taskipy.tasks]
+format = """
+isort . 
+black .
+"""
+kill = "kill -9 $(lsof -t -i :8000)"
+test = "pytest -v"
+run = """ python3 app/main.py """
+doc = "mkdocs serve"
+
